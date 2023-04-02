@@ -1,26 +1,53 @@
 /* By Athlon Front-End Team */
 
 /* Core variables */
-@import 'base/vars';
+@import "base/vars";
 
 /* CSS Reset */
-@import 'base/reset';
+@import "base/reset";
 
 /* CSS print */
-@import 'base/print';
+@import "base/print";
 
 /* Fonts */
-@import 'base/fonts';
+@import "base/fonts";
+
+/* Medias */
+@import "base/media";
 
 /* Mixins, helpers and functions */
-@import 'base/mixins';
+@import "base/mixins";
 
-/* Vendor */
+/* Vendor */ /* Components */ /* Browser specific styles */
+@import "dirty/hacks";
 
-/* Components */
+:root {
+	--gfs: 14.4;
 
-/* Browser specific styles */
-@import 'dirty/hacks';
+	@include mobile {
+		--gfs: 3.75;
+	}
+}
 
-/* Demo Page styles */
-@import 'demo';
+html {
+	font-size: 1vw;
+}
+
+body {
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: $white;
+	color: $black;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
