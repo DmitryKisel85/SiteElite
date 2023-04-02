@@ -18,9 +18,6 @@
 /* Mixins, helpers and functions */
 @import "base/mixins";
 
-/* Vendor */ /* Components */ /* Browser specific styles */
-@import "dirty/hacks";
-
 :root {
 	--gfs: 14.4;
 
