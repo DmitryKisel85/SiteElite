@@ -1,5 +1,5 @@
-/* Core variables */
-@import "base/vars";
+/* Color variables */
+@import "base/colors";
 
 /* CSS Reset */
 @import "base/reset";
@@ -16,6 +16,8 @@
 /* Mixins, helpers and functions */
 @import "base/mixins";
 
+@import "header";
+
 :root {
 	--gfs: 14.4;
 
@@ -26,4 +28,23 @@
 
 html {
 	font-size: 1vw;
+	font-family: "Gilroy", sans-serif;
+	color: $dark-grey;
+}
+
+.container {
+	max-width: remsize(1920);
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	margin: 0 auto;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	> * {
+		min-width: 0;
+	}
 }

@@ -64,14 +64,17 @@ module.exports = {
 			},
 			{
 				test: /\.(eot|ttf|woff|woff2)$/,
-				type: "asset",
 				parser: {
 					dataUrlCondition: {
-						maxSize: environment.limits.images,
+						maxSize: environment.limits.fonts,
 					},
 				},
-				generator: {
-					filename: "images/[name].[hash:6][ext]",
+				use: {
+					// eslint-disable-next-line quotes
+					loader: "file-loader",
+					options: {
+						name: "[name].[ext]",
+					},
 				},
 			},
 		],
@@ -124,6 +127,11 @@ module.exports = {
 					globOptions: {
 						ignore: ["*.DS_Store", "Thumbs.db"],
 					},
+				},
+				{
+					from: path.resolve(environment.paths.source, "fonts"),
+					to: path.resolve(environment.paths.output, "fonts"),
+					toType: "dir",
 				},
 			],
 		}),
