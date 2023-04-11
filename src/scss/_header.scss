@@ -2,33 +2,35 @@
 @use "base/colors";
 @use "base/media";
 
+@import "components/hamburger";
+
 .header {
 	display: flex;
 	align-items: center;
 	height: remsize(90);
 	border-bottom: 1px solid $medium-grey;
+}
 
-	&__box {
-		padding: 0 remsize(35);
+.header-box {
+	padding: 0 remsize(35);
+}
+
+.header-link {
+	display: block;
+	cursor: pointer;
+	font-size: remsize(16);
+	font-weight: 600;
+	line-height: remsize(24.8);
+	color: $dark-grey;
+
+	@include desktopS {
+		font-size: remsize(15);
+		line-height: remsize(23.25);
 	}
 
-	&__link {
-		display: block;
-		cursor: pointer;
-		font-size: remsize(16);
-		font-weight: 600;
-		line-height: remsize(24.8);
-		color: $dark-grey;
-
-		@include desktopS {
-			font-size: remsize(15);
-			line-height: remsize(23.25);
-		}
-
-		@include tablet {
-			font-size: remsize(14);
-			line-height: remsize(21.7);
-		}
+	@include tablet {
+		font-size: remsize(14);
+		line-height: remsize(21.7);
 	}
 }
 
@@ -65,7 +67,9 @@
 		width: remsize(24);
 		height: remsize(24);
 	}
+}
 
+.location-header.header-box {
 	@include tablet {
 		display: none;
 	}
@@ -88,189 +92,5 @@
 		justify-content: flex-end;
 		border-right: 1px solid $medium-grey;
 		border-left: none;
-	}
-}
-
-.hamburger-menu {
-	position: relative;
-	display: none;
-
-	&__toggle:checked ~ &__btn > span {
-		transform: rotate(45deg);
-	}
-	&__toggle:checked ~ &__btn > span::before {
-		top: 0;
-		transform: rotate(0);
-	}
-	&__toggle:checked ~ &__btn > span::after {
-		top: 0;
-		transform: rotate(90deg);
-	}
-	&__toggle:checked ~ &__box {
-		right: 0;
-		visibility: visible;
-	}
-
-	&__btn {
-		position: relative;
-		z-index: 1;
-		display: flex;
-		align-items: center;
-
-		width: remsize(15);
-		height: remsize(10);
-
-		cursor: pointer;
-	}
-
-	&__btn > span,
-	&__btn > span::before,
-	&__btn > span::after {
-		position: absolute;
-		display: block;
-
-		width: 100%;
-		height: 1px;
-
-		transition-duration: 0.25s;
-
-		background-color: $dark-grey;
-	}
-	&__btn > span::before {
-		top: remsize(-6);
-		content: "";
-	}
-	&__btn > span::after {
-		top: remsize(5);
-		content: "";
-	}
-
-	&__box {
-		position: fixed;
-
-		top: remsize(90);
-		right: 100%;
-		display: block;
-		visibility: hidden;
-
-		width: 100%;
-		height: 100%;
-		padding: remsize(30);
-
-		transition-duration: 0.25s;
-	}
-
-	&__toggle {
-		opacity: 0;
-	}
-
-	@include tablet {
-		display: flex;
-	}
-}
-
-.location-hamburger {
-	display: flex;
-	align-items: center;
-	margin-top: remsize(48);
-	gap: remsize(10);
-
-	&__icon {
-		width: remsize(24);
-		height: remsize(24);
-	}
-}
-
-.accordion {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: remsize(25) 0;
-	animation: flipdown 0.5s ease both;
-	border-bottom: 1px solid $medium-grey;
-
-	&__btn[type="checkbox"] {
-		position: absolute;
-		z-index: 1;
-		width: 100%;
-		height: 100%;
-		opacity: 0;
-		cursor: pointer;
-	}
-	&__btn[type="checkbox"]:checked ~ .accordion__list {
-		max-height: 0;
-		margin-top: 0;
-		opacity: 0;
-		transform: translate(0, 50%);
-	}
-
-	&__btn[type="checkbox"]:checked + .accordion__box > .accordion__icon {
-		transform: rotate(180deg);
-	}
-
-	&__box {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	&__header {
-		font-size: remsize(28);
-		font-weight: 600;
-		line-height: remsize(33.6);
-		color: $dark-grey;
-	}
-
-	&__icon {
-		transform: rotate(0deg);
-	}
-
-	&__list {
-		position: relative;
-		z-index: 2;
-		display: block;
-		overflow: hidden;
-		margin-top: remsize(15);
-		opacity: 1;
-	}
-
-	&__icon,
-	&__list {
-		transition: transform 0.25s ease-in-out;
-	}
-
-	&__list-item {
-		padding: remsize(5) 0;
-	}
-
-	&__link {
-		font-size: remsize(14);
-		font-weight: 400;
-		line-height: remsize(21.7);
-		color: $dark-grey;
-	}
-}
-
-@keyframes flipdown {
-	0% {
-		opacity: 0;
-		transform: rotateX(-90deg);
-		transform-origin: top center;
-	}
-	5% {
-		opacity: 1;
-	}
-	80% {
-		transform: rotateX(8deg);
-	}
-	83% {
-		transform: rotateX(6deg);
-	}
-	92% {
-		transform: rotateX(-3deg);
-	}
-	100% {
-		transform: rotateX(0deg);
-		transform-origin: top center;
 	}
 }
