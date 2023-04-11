@@ -1,6 +1,6 @@
-@import "base/mixins";
-@import "base/colors";
-@import "base/media";
+@use "base/mixins";
+@use "base/colors";
+@use "base/media";
 
 .header {
 	display: flex;
@@ -13,8 +13,22 @@
 	}
 
 	&__link {
-		color: $dark-grey;
+		display: block;
 		cursor: pointer;
+		font-size: remsize(16);
+		font-weight: 600;
+		line-height: remsize(24.8);
+		color: $dark-grey;
+
+		@include desktopS {
+			font-size: remsize(15);
+			line-height: remsize(23.25);
+		}
+
+		@include tablet {
+			font-size: remsize(14);
+			line-height: remsize(21.7);
+		}
 	}
 }
 
@@ -28,9 +42,9 @@
 	display: flex;
 	flex: 1;
 	align-items: center;
+	height: 100%;
 	border-left: 1px solid $medium-grey;
 	gap: remsize(30);
-	height: 100%;
 
 	&__list {
 		display: flex;
@@ -72,8 +86,8 @@
 	@include tablet {
 		flex: 1;
 		justify-content: flex-end;
-		border-left: none;
 		border-right: 1px solid $medium-grey;
+		border-left: none;
 	}
 }
 
@@ -93,155 +107,57 @@
 		transform: rotate(90deg);
 	}
 	&__toggle:checked ~ &__box {
-		visibility: visible;
 		right: 0;
+		visibility: visible;
 	}
 
 	&__btn {
+		position: relative;
+		z-index: 1;
 		display: flex;
 		align-items: center;
-		position: relative;
 
 		width: remsize(15);
 		height: remsize(10);
 
 		cursor: pointer;
-		z-index: 1;
 	}
 
 	&__btn > span,
 	&__btn > span::before,
 	&__btn > span::after {
-		display: block;
 		position: absolute;
+		display: block;
 
 		width: 100%;
 		height: 1px;
 
-		background-color: $dark-grey;
-
 		transition-duration: 0.25s;
+
+		background-color: $dark-grey;
 	}
 	&__btn > span::before {
-		content: "";
 		top: remsize(-6);
+		content: "";
 	}
 	&__btn > span::after {
-		content: "";
 		top: remsize(5);
+		content: "";
 	}
 
 	&__box {
-		display: block;
 		position: fixed;
-		visibility: hidden;
-		padding: remsize(30);
 
 		top: remsize(90);
 		right: 100%;
+		display: block;
+		visibility: hidden;
 
 		width: 100%;
 		height: 100%;
+		padding: remsize(30);
 
 		transition-duration: 0.25s;
-	}
-
-	&__item {
-		display: block;
-		padding: 12px 24px;
-		position: relative;
-
-		color: #333;
-
-		font-family: "Roboto", sans-serif;
-		font-size: 20px;
-		font-weight: 600;
-
-		text-decoration: none;
-
-		transition-duration: 0.25s;
-
-		p {
-			color: rgba(48, 69, 92, 0.8);
-			font-size: 17px;
-			line-height: 26px;
-			letter-spacing: 1px;
-			position: relative;
-			overflow: hidden;
-			max-height: 800px;
-			opacity: 1;
-			transform: translate(0, 0);
-			margin-top: 14px;
-			z-index: 2;
-		}
-
-		.transition,
-		i:before,
-		i:after,
-		p {
-			transition: all 0.25s ease-in-out;
-		}
-
-		.flipIn,
-		&,
-		h1 {
-			animation: flipdown 0.5s ease both;
-		}
-
-		&:nth-of-type(1) {
-			animation-delay: 0.5s;
-		}
-		&:nth-of-type(2) {
-			animation-delay: 0.75s;
-		}
-		&:nth-of-type(3) {
-			animation-delay: 1s;
-		}
-		&:last-of-type {
-			padding-bottom: 0;
-		}
-
-		i {
-			position: absolute;
-			transform: translate(-6px, 0);
-			margin-top: 16px;
-			right: 0;
-		}
-		i:before,
-		i:after {
-			content: "";
-			position: absolute;
-			background-color: #ff6873;
-			width: 3px;
-			height: 9px;
-		}
-		i:before {
-			transform: translate(-2px, 0) rotate(45deg);
-		}
-		i:after {
-			transform: translate(2px, 0) rotate(-45deg);
-		}
-
-		input[type="checkbox"] {
-			position: absolute;
-			cursor: pointer;
-			width: 100%;
-			height: 100%;
-			z-index: 1;
-			opacity: 0;
-		}
-		input[type="checkbox"]:checked ~ p {
-			margin-top: 0;
-			max-height: 0;
-			opacity: 0;
-			transform: translate(0, 50%);
-		}
-		input[type="checkbox"]:checked ~ i:before {
-			transform: translate(2px, 0) rotate(45deg);
-		}
-		input[type="checkbox"]:checked ~ i:after {
-			transform: translate(-2px, 0) rotate(-45deg);
-		}
 	}
 
 	&__toggle {
@@ -253,11 +169,93 @@
 	}
 }
 
+.location-hamburger {
+	display: flex;
+	align-items: center;
+	margin-top: remsize(48);
+	gap: remsize(10);
+
+	&__icon {
+		width: remsize(24);
+		height: remsize(24);
+	}
+}
+
+.accordion {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: remsize(25) 0;
+	animation: flipdown 0.5s ease both;
+	border-bottom: 1px solid $medium-grey;
+
+	&__btn[type="checkbox"] {
+		position: absolute;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		cursor: pointer;
+	}
+	&__btn[type="checkbox"]:checked ~ .accordion__list {
+		max-height: 0;
+		margin-top: 0;
+		opacity: 0;
+		transform: translate(0, 50%);
+	}
+
+	&__btn[type="checkbox"]:checked + .accordion__box > .accordion__icon {
+		transform: rotate(180deg);
+	}
+
+	&__box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__header {
+		font-size: remsize(28);
+		font-weight: 600;
+		line-height: remsize(33.6);
+		color: $dark-grey;
+	}
+
+	&__icon {
+		transform: rotate(0deg);
+	}
+
+	&__list {
+		position: relative;
+		z-index: 2;
+		display: block;
+		overflow: hidden;
+		margin-top: remsize(15);
+		opacity: 1;
+	}
+
+	&__icon,
+	&__list {
+		transition: transform 0.25s ease-in-out;
+	}
+
+	&__list-item {
+		padding: remsize(5) 0;
+	}
+
+	&__link {
+		font-size: remsize(14);
+		font-weight: 400;
+		line-height: remsize(21.7);
+		color: $dark-grey;
+	}
+}
+
 @keyframes flipdown {
 	0% {
 		opacity: 0;
-		transform-origin: top center;
 		transform: rotateX(-90deg);
+		transform-origin: top center;
 	}
 	5% {
 		opacity: 1;
@@ -272,7 +270,7 @@
 		transform: rotateX(-3deg);
 	}
 	100% {
-		transform-origin: top center;
 		transform: rotateX(0deg);
+		transform-origin: top center;
 	}
 }
