@@ -10,6 +10,10 @@
 	animation: flipdown 0.5s ease both;
 	border-bottom: 1px solid $medium-grey;
 
+	@include mobile {
+		padding: remsize(20) 0;
+	}
+
 	&__btn[type="checkbox"] {
 		position: absolute;
 		z-index: 1;
@@ -40,6 +44,10 @@
 		font-weight: 600;
 		line-height: remsize(33.6);
 		color: $dark-grey;
+
+		@include mobile {
+			font-size: remsize(18);
+		}
 	}
 
 	&__icon {

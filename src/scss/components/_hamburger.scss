@@ -8,6 +8,16 @@
 	position: relative;
 	display: none;
 
+	@include tablet {
+		display: flex;
+		align-items: center;
+	}
+
+	@include mobile {
+		border-left: 1px solid $medium-grey;
+		height: 100%;
+	}
+
 	&__toggle:checked ~ &__btn > span {
 		transform: rotate(45deg);
 	}
@@ -19,7 +29,7 @@
 		top: 0;
 		transform: rotate(90deg);
 	}
-	&__toggle:checked ~ &__box {
+	&__toggle:checked ~ &__container {
 		right: 0;
 		visibility: visible;
 	}
@@ -58,7 +68,7 @@
 		content: "";
 	}
 
-	&__box {
+	&__container {
 		position: fixed;
 
 		top: remsize(90);
@@ -71,17 +81,32 @@
 		padding: remsize(30);
 
 		transition-duration: 0.25s;
+
+		@include mobile {
+			top: remsize(30);
+			padding: remsize(20) remsize(15);
+			overflow: auto;
+		}
 	}
 
 	&__toggle {
 		opacity: 0;
 	}
 
-	@include tablet {
-		display: flex;
+	&__location.location {
+		margin-top: remsize(48);
+
+		@include mobile {
+			margin-top: remsize(20);
+		}
 	}
 
-	&__location {
-		margin-top: remsize(48);
+	&__contacts.contacts {
+		display: none;
+
+		@include mobile {
+			margin-top: remsize(20);
+			display: flex;
+		}
 	}
 }

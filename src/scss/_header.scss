@@ -9,10 +9,23 @@
 	align-items: center;
 	height: remsize(90);
 	border-bottom: 1px solid $medium-grey;
+
+	@include desktopS {
+		height: remsize(70);
+	}
+
+	@include mobile {
+		height: remsize(50);
+		justify-content: space-between;
+	}
 }
 
 .header-box {
 	padding: 0 remsize(35);
+
+	@include mobile {
+		padding: 0 remsize(20);
+	}
 }
 
 .header-link {
@@ -38,6 +51,10 @@
 	display: block;
 	width: remsize(143);
 	height: 100%;
+
+	@include mobile {
+		width: remsize(116);
+	}
 }
 
 .menu-header {
@@ -58,7 +75,8 @@
 	}
 }
 
-.location-header {
+.location,
+.contacts {
 	display: flex;
 	align-items: center;
 	gap: remsize(10);
@@ -69,28 +87,26 @@
 	}
 }
 
-.location-header.header-box {
+.location.header-box {
+	border-right: 1px solid $medium-grey;
+	height: 100%;
+
 	@include tablet {
 		display: none;
 	}
 }
 
-.contacts-header {
-	display: flex;
-	align-items: center;
-	height: 100%;
-	border-left: 1px solid $medium-grey;
-	gap: remsize(10);
-
-	&__icon {
-		width: remsize(24);
-		height: remsize(24);
-	}
-
+.contacts.header-box {
 	@include tablet {
+		border-right: 1px solid $medium-grey;
+		height: 100%;
 		flex: 1;
 		justify-content: flex-end;
 		border-right: 1px solid $medium-grey;
 		border-left: none;
+	}
+
+	@include mobile {
+		display: none;
 	}
 }
